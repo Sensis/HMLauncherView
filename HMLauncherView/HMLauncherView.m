@@ -210,15 +210,15 @@ static const CGFloat kLongPressDuration = 0.3;
     NSUInteger numberOfRows    = [self.dataSource numberOfRowsInLauncherView:self];
     CGSize  iconSize           = [self.dataSource buttonDimensionsInLauncherView:self];
     CGFloat iconSpacer         = [self calculateIconSpacer:numberOfColumns buttonSize:iconSize];
-    
-    CGFloat pageWidth = CGRectGetWidth(self.scrollView.bounds);
-    
+
+    CGFloat pageWidth = CGRectGetWidth(self.scrollView.bounds) - 2 * [self horizontalOffset];
+
     __block NSInteger columnIndexForNextPage = 0;
     
     [self enumeratePagesUsingBlock:^(NSUInteger pageIndex) {
         CGFloat pageX   = pageWidth * pageIndex;
         NSInteger iconY = 0;
-        CGFloat iconXStart = pageX + [self horizontalOffset];
+        CGFloat iconXStart = pageX + 2 * pageIndex * [self horizontalOffset];
         NSInteger currentColumnIndex = columnIndexForNextPage;
         columnIndexForNextPage = 0;
         NSInteger currentRowIndex = 0;

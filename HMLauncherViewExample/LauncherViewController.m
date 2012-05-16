@@ -49,7 +49,7 @@
     HMLauncherView *launcherViewLeft = self.launcherParentView.launcherViewLeft;
 
     NSParameterAssert(launcherDataLeft != nil);
-    [launcherViewLeft setHorizontalOffset:5.];
+    [launcherViewLeft setHorizontalOffset:15.];
     [launcherViewLeft setPersistKey:launcherDataLeft.persistKey];
     [launcherViewLeft setDataSource:launcherService];
     [launcherViewLeft setDelegate:self];
