@@ -169,7 +169,7 @@ static const CGFloat kLongPressDuration = 0.3;
 }
 
 - (CGFloat) calculateIconSpacer:(NSUInteger) numberOfColumns buttonSize:(CGSize) buttonSize {
-    CGFloat contentWidth = CGRectGetWidth(self.bounds);
+    CGFloat contentWidth = CGRectGetWidth(self.bounds) - 2 * [self horizontalOffset];
     CGFloat allIconsWidth = numberOfColumns * buttonSize.width;
     CGFloat iconSpacer = (contentWidth - allIconsWidth) / (numberOfColumns - 1);
     return iconSpacer;
@@ -214,9 +214,9 @@ static const CGFloat kLongPressDuration = 0.3;
     CGFloat pageWidth = CGRectGetWidth(self.scrollView.bounds) - 2 * [self horizontalOffset];
 
     __block NSInteger columnIndexForNextPage = 0;
-    
+
     [self enumeratePagesUsingBlock:^(NSUInteger pageIndex) {
-        CGFloat pageX   = pageWidth * pageIndex;
+        CGFloat pageX   = pageWidth * pageIndex + [self horizontalOffset];
         NSInteger iconY = 0;
         CGFloat iconXStart = pageX + 2 * pageIndex * [self horizontalOffset];
         NSInteger currentColumnIndex = columnIndexForNextPage;

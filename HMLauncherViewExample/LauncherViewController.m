@@ -58,7 +58,7 @@
     HMLauncherData *launcherDataRight = launcherService.launcherDataRight;
     HMLauncherView *launcherViewRight = self.launcherParentView.launcherViewRight;
     NSParameterAssert(launcherViewRight != nil);
-    [launcherViewRight setHorizontalOffset:0.];
+    [launcherViewRight setHorizontalOffset:5.];
     [launcherViewRight setPersistKey:launcherDataRight.persistKey];
     [launcherViewRight setDataSource:launcherService];
     [launcherViewRight setDelegate:self];
