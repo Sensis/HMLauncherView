@@ -47,22 +47,23 @@
     [launcherService launcherDataLeft];
     HMLauncherData *launcherDataLeft = launcherService.launcherDataLeft;
     HMLauncherView *launcherViewLeft = self.launcherParentView.launcherViewLeft;
-    
+
     NSParameterAssert(launcherDataLeft != nil);
+    [launcherViewLeft setHorizontalOffset:5.];
     [launcherViewLeft setPersistKey:launcherDataLeft.persistKey];
     [launcherViewLeft setDataSource:launcherService];
     [launcherViewLeft setDelegate:self];
     [launcherViewLeft reloadData];
-    
-    
+
     HMLauncherData *launcherDataRight = launcherService.launcherDataRight;
     HMLauncherView *launcherViewRight = self.launcherParentView.launcherViewRight;
     NSParameterAssert(launcherViewRight != nil);
+    [launcherViewRight setHorizontalOffset:0.];
     [launcherViewRight setPersistKey:launcherDataRight.persistKey];
     [launcherViewRight setDataSource:launcherService];
     [launcherViewRight setDelegate:self];
     [launcherViewRight reloadData];
-    
+
     [super viewDidLoad];
 }
 

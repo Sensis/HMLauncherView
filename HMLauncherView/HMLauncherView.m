@@ -101,6 +101,7 @@ static const CGFloat kLongPressDuration = 0.3;
 @synthesize shouldLayoutDragButton;
 @synthesize targetPath;
 @synthesize persistKey;
+@synthesize horizontalOffset;
 
 - (void) reloadData {
     self.dragIcon = nil;
@@ -217,7 +218,7 @@ static const CGFloat kLongPressDuration = 0.3;
     [self enumeratePagesUsingBlock:^(NSUInteger pageIndex) {
         CGFloat pageX   = pageWidth * pageIndex;
         NSInteger iconY = 0;
-        CGFloat iconXStart = pageX;
+        CGFloat iconXStart = pageX + [self horizontalOffset];
         NSInteger currentColumnIndex = columnIndexForNextPage;
         columnIndexForNextPage = 0;
         NSInteger currentRowIndex = 0;
