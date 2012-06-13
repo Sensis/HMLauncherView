@@ -149,7 +149,7 @@ static const CGFloat kLongPressDuration = 0.3;
     [UIView animateWithDuration:0.25 animations:^{
         icon.transform = CGAffineTransformMakeScale(0.1, 0.1);
     } completion:^(BOOL finished) {
-        NSLog(@"removeIconAnimated finished");
+        DLog(@"removeIconAnimated finished");
         [self removeIcon:icon];
         block();
     }];
@@ -342,7 +342,7 @@ static const CGFloat kLongPressDuration = 0.3;
 }
 
 - (void) longPressBegan:(HMLauncherIcon*) icon sender:(UILongPressGestureRecognizer*) longPress {
-    NSLog(@"longPressBegan: %@", persistKey);
+    DLog(@"longPressBegan: %@", persistKey);
     if (!self.editing) {
         [self startEditing];
         [self.delegate launcherViewDidStartEditing:self];
@@ -371,10 +371,10 @@ static const CGFloat kLongPressDuration = 0.3;
 }
 
 - (void) longPressEnded:(HMLauncherIcon*) icon sender:(UILongPressGestureRecognizer*) longPress {
-    NSLog(@"longPressEnded: %@", self);
+    DLog(@"longPressEnded: %@", self);
     
     HMLauncherView *targetLauncherView = [self.delegate targetLauncherViewForIcon:icon];
-    NSLog(@"launcherView responsible: %@", targetLauncherView);
+    DLog(@"launcherView responsible: %@", targetLauncherView);
     if (targetLauncherView == nil) {
         targetLauncherView = self;
         self.targetPath = nil;
@@ -396,10 +396,10 @@ static const CGFloat kLongPressDuration = 0.3;
                                       toIndex:iconIndex];
                 
             } else {
-                NSLog(@"removing icon: %@ from launcherView: %@", self.dragIcon, self);
+                DLog(@"removing icon: %@ from launcherView: %@", self.dragIcon, self);
                 [self.dataSource launcherView:self removeIcon:self.dragIcon];
                 [self.delegate launcherView:self didDeleteIcon:self.dragIcon];
-                NSLog(@"adding icon: %@ to launcherView: %@", self.dragIcon, targetLauncherView);
+                DLog(@"adding icon: %@ to launcherView: %@", self.dragIcon, targetLauncherView);
                 [targetLauncherView.delegate launcherView:targetLauncherView willAddIcon:self.dragIcon];            
                 [targetLauncherView.dataSource launcherView:targetLauncherView addIcon:self.dragIcon
                                             pageIndex:pageIndex
@@ -441,7 +441,7 @@ static const CGFloat kLongPressDuration = 0.3;
         [self updatePagerWithContentOffset:self.scrollView.contentOffset];
         [self startShaking];
     } else {
-        NSLog(@" %@: editing of was already started", persistKey);
+        DLog(@" %@: editing of was already started", persistKey);
     }
 }
 
@@ -457,9 +457,8 @@ static const CGFloat kLongPressDuration = 0.3;
         [self setDragIcon:nil];
         [self layoutIconsAnimated];
     } else {
-        NSLog(@" %@: editing of was already stopped", persistKey);
+        DLog(@" %@: editing of was already stopped", persistKey);
     }
-    
 }
 
 - (void) checkIfScrollingIsNeeded:(HMLauncherIcon*) launcherIcon {
@@ -699,7 +698,7 @@ static const CGFloat kLongPressDuration = 0.3;
 }
 
 - (void) scrollViewDidEndDecelerating:(UIScrollView *) inScrollView {
-    [self updatePagerWithContentOffset:inScrollView.contentOffset];    
+    [self updatePagerWithContentOffset:inScrollView.contentOffset];
 }
 
 - (NSString*) description {
