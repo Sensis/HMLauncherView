@@ -620,6 +620,13 @@ static const CGFloat kLongPressDuration = 0.3;
     }];  
 }
 
+#pragma mark - PageControl Actions
+-(void)pageControlValueChanged:(UIPageControl *)control{
+    [self.scrollView setContentOffset:CGPointMake(self.scrollView.bounds.size.width * control.currentPage,
+                                                  self.scrollView.contentOffset.y)
+                             animated:YES];
+}
+
 # pragma mark - enumeration
 - (void) enumeratePagesUsingBlock:(void (^) (NSUInteger page)) block {
     NSUInteger numberOfPages = [self.dataSource numberOfPagesInLauncherView:self];    
@@ -734,6 +741,8 @@ static const CGFloat kLongPressDuration = 0.3;
                              CGRectMake(0, 10, 10, 10)
                              ] autorelease];
         [self.pageControl setHidesForSinglePage:YES];
+        [self.pageControl addTarget:self action:@selector(pageControlValueChanged:)
+                   forControlEvents:UIControlEventValueChanged];
         [self addSubview:self.pageControl];
 
     }
