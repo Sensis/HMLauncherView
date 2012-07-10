@@ -40,4 +40,9 @@
 @property (nonatomic, assign) NSObject<HMLauncherViewDelegate> *delegate;
 @property (nonatomic, retain) NSString *persistKey;
 @property (nonatomic, assign) CGFloat horizontalOffset;
+
+//Page control customization
++ (Class) pageControlClass;
+@property (nonatomic, retain) UIPageControl *pageControl;
+
 @end

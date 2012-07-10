@@ -84,7 +84,6 @@ static const CGFloat kLongPressDuration = 0.3;
 - (UIView*) keyView;
 
 @property (nonatomic, retain) UIScrollView *scrollView;
-@property (nonatomic, retain) UIPageControl *pageControl;
 @property (nonatomic, assign) NSTimer *scrollTimer;
 @property (nonatomic, assign) HMLauncherIcon *dragIcon;
 @property (nonatomic, assign) HMLauncherIcon *closingIcon;
@@ -301,6 +300,11 @@ static const CGFloat kLongPressDuration = 0.3;
     [tap setNumberOfTapsRequired:tapsRequired];
     [icon addGestureRecognizer:tap];
     return [tap autorelease];
+}
+
++ (Class) pageControlClass
+{
+	return [UIPageControl class];
 }
 
 # pragma mark - Gesture Actions
@@ -737,7 +741,7 @@ static const CGFloat kLongPressDuration = 0.3;
         [self.scrollView setShowsVerticalScrollIndicator:NO];
         [self addSubview:self.scrollView];
         
-        self.pageControl = [[[UIPageControl alloc] initWithFrame:
+        self.pageControl = [[[[[self class] pageControlClass] alloc] initWithFrame:
                              CGRectMake(0, 10, 10, 10)
                              ] autorelease];
         [self.pageControl setHidesForSinglePage:YES];
