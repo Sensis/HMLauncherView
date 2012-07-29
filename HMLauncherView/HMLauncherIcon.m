@@ -16,6 +16,9 @@
 #import "HMLauncherIcon.h"
 #import "HMLauncherItem.h"
 
+@interface HMLauncherIcon(private)
+@end
+
 @implementation HMLauncherIcon
 @synthesize canBeDeleted;
 @synthesize canBeDragged;
@@ -24,9 +27,6 @@
 @synthesize identifier;
 @synthesize originIndexPath;
 @synthesize launcherItem;
-
-@interface HMLauncherIcon(private) 
-@end
 
 - (BOOL) hitCloseButton:(CGPoint)point {
     NSAssert(NO, @"this method must be overridden");
