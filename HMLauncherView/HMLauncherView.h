@@ -40,6 +40,7 @@
 @property (nonatomic, assign) NSObject<HMLauncherViewDelegate> *delegate;
 @property (nonatomic, retain) NSString *persistKey;
 @property (nonatomic, assign) CGFloat horizontalOffset;
+@property (nonatomic, retain) UIScrollView *scrollView;
 
 //Page control customization
 + (Class) pageControlClass;

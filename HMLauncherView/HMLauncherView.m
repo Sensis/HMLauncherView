@@ -33,7 +33,7 @@ static const CGFloat kLongPressDuration = 0.3;
 }
 @end
 
-@interface HMLauncherView() {
+@interface HMLauncherView() <UIGestureRecognizerDelegate> {
     BOOL editing;    
 }
 - (void) enumeratePagesUsingBlock:(void (^) (NSUInteger page)) block;
@@ -83,7 +83,6 @@ static const CGFloat kLongPressDuration = 0.3;
 - (void) updateDeleteButtons;
 - (UIView*) keyView;
 
-@property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, assign) NSTimer *scrollTimer;
 @property (nonatomic, assign) HMLauncherIcon *dragIcon;
 @property (nonatomic, assign) HMLauncherIcon *closingIcon;
@@ -299,6 +298,7 @@ static const CGFloat kLongPressDuration = 0.3;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapIcon:)];
     [tap setNumberOfTapsRequired:tapsRequired];
     [icon addGestureRecognizer:tap];
+    tap.delegate = self;
     return [tap autorelease];
 }
 
@@ -306,6 +306,12 @@ static const CGFloat kLongPressDuration = 0.3;
 {
 	return [UIPageControl class];
 }
+
++ (Class) scrollViewClass
+{
+	return [UIScrollView class];
+}
+
 
 # pragma mark - Gesture Actions
 - (void) didTapIcon:(UITapGestureRecognizer*) sender {
@@ -731,10 +737,11 @@ static const CGFloat kLongPressDuration = 0.3;
 }
 
 #pragma mark - lifecycle
+
 - (id)initWithFrame:(CGRect) frame {
     if (self = [super initWithFrame:frame]) {
         [self setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
-        self.scrollView = [[[UIScrollView alloc] initWithFrame:self.bounds] autorelease];
+        self.scrollView = [[[[[self class] scrollViewClass] alloc] initWithFrame:self.bounds] autorelease];
         [self.scrollView setDelegate:self];
         [self.scrollView setPagingEnabled:YES];
         [self.scrollView setShowsHorizontalScrollIndicator:NO]; 
